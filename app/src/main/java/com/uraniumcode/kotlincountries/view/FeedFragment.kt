@@ -43,6 +43,14 @@ class FeedFragment : Fragment() {
         countryListRec.adapter=countryAdapter
 
             observeLiveData()
+
+        swipeRefreshLayout.setOnRefreshListener {
+            countryListRec.visibility=View.GONE
+            countryError.visibility=View.GONE
+            countryLoading.visibility=View.VISIBLE
+            viewModel.refreshData()
+            swipeRefreshLayout.isRefreshing=false
+        }
       /*  to_countrybtn.setOnClickListener {
             val action = FeedFragmentDirections.actionFeedFragmentToCountryFragment()
         Navigation.findNavController(it).navigate(action)
